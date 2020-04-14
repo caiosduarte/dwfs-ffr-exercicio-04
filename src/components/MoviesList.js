@@ -7,6 +7,7 @@ import { MovieItem } from "./MovieItem";
 export const MoviesList = () => {
   const [movies, setMovies] = useState({data: {results: [] }});
 
+
   // resolve o problema das promises do javascript
   const requestMovies = async () => {
     const moviesResults = await MoviesService.getPopularMovies();
@@ -21,7 +22,7 @@ export const MoviesList = () => {
     <>
     <ul>
       {movies.data.results.map(movie => (
-        <MovieItem key={movie.id} id={movie.id} title={movie.title} popularity={movie.popularity}/>
+        <MovieItem key={movie.id} id={movie.id} title={movie.title} />
       ))}
      </ul> 
     </>
