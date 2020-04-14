@@ -23,10 +23,9 @@ export const MoviesList = () => {
   
   const isFavorite = id => {
     let encontrou = false;
-    favorites.map(f => {
+    favorites.forEach(f => {
       if (f.id == id) { 
         encontrou = true;
-        break;
       }
     });
     return encontrou;
