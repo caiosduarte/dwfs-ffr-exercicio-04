@@ -7,8 +7,9 @@ import { MovieItem } from "./MovieItem";
 import { useSelector } from "react-redux";
 
 export const MoviesList = () => {
+  const favorites = useSelector(state => state.items);
   const [movies, setMovies] = useState({data: {results: [] }});
-  const favorites = useSelector(state => state.items);  
+    
 
   // resolve o problema das promises do javascript
   const requestMovies = async () => {
@@ -20,15 +21,22 @@ export const MoviesList = () => {
     requestMovies();    
   }, []);
   
-  const isFavorite = movie => {
-    return favorites.indexOf(movie) > -1;
+  const isFavorite = id => {
+    let encontrou = false;
+    favorites.map(f => {
+      if (f.id == id) { 
+        encontrou = true;
+        break;
+      }
+    });
+    return encontrou;
   }
 
   return (
     <>
     <ul>
       {movies.data.results.map(movie => (
-        <MovieItem key={movie.id} id={movie.id} title={movie.title} favorite={isFavorite(movie)}/>
+        <MovieItem key={movie.id} id={movie.id} title={movie.title} favorite={isFavorite(movie.id)}/>
       ))}
      </ul> 
     </>
